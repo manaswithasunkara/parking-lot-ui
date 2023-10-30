@@ -24,7 +24,7 @@ class _RegisterState extends State<Register> {
 
 
   Future<void> register() async{
-    final response = await http.post(Uri.parse('https://63f4-103-22-173-38.ngrok-free.app/register'),
+    final response = await http.post(Uri.parse('${Urls.url}/register'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },

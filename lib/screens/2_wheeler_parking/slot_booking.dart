@@ -27,11 +27,12 @@ class BusLayout extends StatefulWidget {
 }
 
 class _BusLayoutState extends State<BusLayout> {
+  Set<SeatNumber> selectedSeats = {};
   static Future<Map<String, dynamic>> selectSeats(
       List<Map<String, dynamic>> selectedSeats) async {
     final response = await http.post(
       Uri.parse(
-          'https://b94f-2401-4900-1cb0-7c75-71cb-efc7-8e8a-5fc2.ngrok-free.app/select-seats'),
+          '${Urls.url}/select-seats'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -47,11 +48,19 @@ class _BusLayoutState extends State<BusLayout> {
     }
   }
 
-  Set<SeatNumber> selectedSeats = {};
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.keyboard_arrow_left),
+          onPressed: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context)=> Two_Dashboards()));
+          },
+        ),
+        title: Text("Parking only"),
+      ),
       body: SafeArea(
         child: Container(
           margin: EdgeInsets.fromLTRB(
@@ -63,13 +72,6 @@ class _BusLayoutState extends State<BusLayout> {
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const SizedBox(
-                height: 16,
-              ),
-              const Text("parking entry"),
-              const SizedBox(
-                height: 32,
-              ),
               Flexible(
                 child: SizedBox(
                   width: double.maxFinite,
@@ -249,7 +251,13 @@ class _BusLayoutState extends State<BusLayout> {
               ElevatedButton(
                 onPressed: () {
                   // selectSeats(selectedSeats.cast<Map<String, dynamic>>().toList());
+                  List<Map<String, dynamic>> selectedList = selectedSeats.map((seats) =>
+                  {
+                    "rowI": seats.rowI, "colI": seats.colI
+                  }).toList();
+                  selectSeats(selectedList);
                   Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Razor_Pay()));
+                  debugPrint("checking the seat $selectedSeats, $selectedList");
                 },
                 style: ButtonStyle(
                   backgroundColor:
@@ -274,6 +282,7 @@ class SeatNumber {
   @override
   bool operator ==(Object other) {
     return rowI == (other as SeatNumber).rowI && colI == other.colI;
+
   }
 
   @override
@@ -281,6 +290,7 @@ class SeatNumber {
 
   @override
   String toString() {
+    print('slot id $rowI, $colI');
     return '[$rowI][$colI]';
   }
 }

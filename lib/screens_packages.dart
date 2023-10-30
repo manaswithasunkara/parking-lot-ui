@@ -14,3 +14,4 @@ export 'package:razorpay_flutter/razorpay_flutter.dart';
 export 'screens/payment_gateway/razor_pay.dart';
 export 'package:book_my_seat/book_my_seat.dart';
 export 'screens/qr_code/qrcode.dart';
+export 'constants/strings.dart';
