@@ -43,6 +43,7 @@ dependencies:
   barcode_scan2: ^4.2.1
   device_preview: ^1.1.0
   qr_flutter: ^4.0.0
+
 #  gallery_saver: ^2.3.2
 #  flutter_launcher_icons: ^0.10.0
 #  change_app_package_name: ^1.1.0
@@ -92,6 +93,7 @@ flutter:
      - svg/seat_sold.svg
      - svg/seat_unselected.svg
      - location_logos/sreyas logo.png
+     - images/WhatsApp Image 2023-11-03 at 21.32.36_124ab3d9.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

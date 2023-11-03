@@ -1,3 +1,4 @@
+import 'package:slot_booking1/screens/payment_gateway/razor_pay.dart';
 import 'package:slot_booking1/screens_packages.dart';
 
 class Two_Dashboards extends StatefulWidget {
@@ -41,7 +42,7 @@ class _Two_DashboardsState extends State<Two_Dashboards> {
                 ],
               ),
               onPressed: (){
-                Navigator.of(context).push(MaterialPageRoute(builder: (context)=> TwoSlot()));
+                Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Razor_Pay()));
               },
             ),
 

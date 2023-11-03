@@ -1,33 +1,19 @@
-import 'dart:convert';
-
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:slot_booking1/screens_packages.dart';
 
-class TwoSlot extends StatelessWidget {
+
+class TwoSlot extends StatefulWidget {
   const TwoSlot({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'book_my_seat package example',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const BusLayout(),
-    );
-  }
+  State<TwoSlot> createState() => _TwoSlotState();
 }
 
-class BusLayout extends StatefulWidget {
-  const BusLayout({Key? key}) : super(key: key);
-
-  @override
-  State<BusLayout> createState() => _BusLayoutState();
-}
-
-class _BusLayoutState extends State<BusLayout> {
+class _TwoSlotState extends State<TwoSlot> {
   Set<SeatNumber> selectedSeats = {};
+  String textParkingMessage ='';
+
+
   static Future<Map<String, dynamic>> selectSeats(
       List<Map<String, dynamic>> selectedSeats) async {
     final response = await http.post(
@@ -59,31 +45,27 @@ class _BusLayoutState extends State<BusLayout> {
             Navigator.push(context, MaterialPageRoute(builder: (context)=> Two_Dashboards()));
           },
         ),
-        title: Text("Parking only"),
+        title: const Text("Parking only"),
       ),
       body: SafeArea(
         child: Container(
           margin: EdgeInsets.fromLTRB(
               (MediaQuery.of(context).size.width) * 0.1,
-              (MediaQuery.of(context).size.height) * 0.1,
+              (MediaQuery.of(context).size.height) / 50,
               (MediaQuery.of(context).size.width) * 0.07,
               (MediaQuery.of(context).size.height) * 0.1),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              Text(textParkingMessage),
+              SizedBox(height: 20,),
               Flexible(
                 child: SizedBox(
                   width: double.maxFinite,
                   height: 500,
                   child: SeatLayoutWidget(
-                    onSeatStateChanged: (rowI, colI, seatState) {
-                      if (seatState == SeatState.selected) {
-                        selectedSeats.add(SeatNumber(rowI: rowI, colI: colI));
-                      } else {
-                        selectedSeats.remove(SeatNumber(rowI: rowI, colI: colI));
-                      }
-                    },
+                    onSeatStateChanged: _onSeatChanged,
                     stateModel: const SeatLayoutStateModel(
                       rows: 10,
                       cols: 7,
@@ -250,14 +232,18 @@ class _BusLayoutState extends State<BusLayout> {
               ),
               ElevatedButton(
                 onPressed: () {
+                  if(selectedSeats.isNotEmpty){
                   // selectSeats(selectedSeats.cast<Map<String, dynamic>>().toList());
                   List<Map<String, dynamic>> selectedList = selectedSeats.map((seats) =>
                   {
                     "rowI": seats.rowI, "colI": seats.colI
                   }).toList();
                   selectSeats(selectedList);
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Razor_Pay()));
+                  // Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Razor_Pay(amountController: 20,)));
                   debugPrint("checking the seat $selectedSeats, $selectedList");
+                  }else{
+                    Get.snackbar(snackPosition: SnackPosition.BOTTOM,'Error!', "Please select your slot", duration: const Duration(seconds: 3));
+                  }
                 },
                 style: ButtonStyle(
                   backgroundColor:
@@ -265,12 +251,29 @@ class _BusLayoutState extends State<BusLayout> {
                 ),
                 child: const Text('Book Your Slot'),
               ),
+
             ],
           ),
         ),
       ),
     );
   }
+
+  void _onSeatChanged(rowI, colI, seatState) {
+    if (seatState == SeatState.selected) {
+      _updatedSeat(rowI, colI);
+      selectedSeats.add(SeatNumber(rowI: rowI, colI: colI));
+    } else {
+      selectedSeats.remove(SeatNumber(rowI: rowI, colI: colI));
+    }
+  }
+
+  void _updatedSeat(rowI, colI){
+    setState(() {
+      textParkingMessage = "Your seat number is $rowI$colI per hour 20";
+    });
+  }
+
 }
 
 class SeatNumber {

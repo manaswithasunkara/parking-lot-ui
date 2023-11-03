@@ -6,4 +6,5 @@ class AppColors
   static final blackPrimary = Color(0xff0f1b29);
   static final navyPrimary=  Color(0xff152136);
   static final deepBlue= Color(0xff001b39);
+  static final splashBgColor= Color(0xff07162d);
 }

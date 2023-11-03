@@ -14,7 +14,7 @@ class _Four_DasboardsState extends State<Four_Dasboards> {
     return Scaffold(
       body: Column(
         children: [
-          Text('4 wheeler Dashboards'),
+          const Text('4 wheeler Dashboards'),
 
           Container(
             margin: EdgeInsets.fromLTRB((MediaQuery.of(context).size.width)*0.15, (MediaQuery.of(context).size.height)*0.05, (MediaQuery.of(context).size.width)*0.15, (MediaQuery.of(context).size.height)*0.05,),
@@ -28,15 +28,15 @@ class _Four_DasboardsState extends State<Four_Dasboards> {
                   ),
                   Container(
                     margin: EdgeInsets.fromLTRB((MediaQuery.of(context).size.width)*0.25, (MediaQuery.of(context).size.height)*0, (MediaQuery.of(context).size.width)*0, (MediaQuery.of(context).size.height)*0,),
-                    child: Image.asset('location_logos/sreyas logo.png'),
                     height: MediaQuery.of(context).size.height*0.07,
                     width: MediaQuery.of(context).size.width*0.11,
+                    child: Image.asset('location_logos/sreyas logo.png'),
 
                   )
                 ],
               ),
               onPressed: (){
-                Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Four_slot()));
+                Navigator.of(context).push(MaterialPageRoute(builder: (context)=> FourSlot()));
               },
             ),
 
