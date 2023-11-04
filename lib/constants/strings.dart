@@ -1,3 +1,3 @@
 class Urls {
-  static String url = "https://568a-2401-4900-1c0f-2614-c4b9-83cc-a48a-3eaa.ngrok-free.app";
+  static String url = "https://55d6-2401-4900-1c0f-2614-3d61-5f4c-9f81-7635.ngrok-free.app";
 }

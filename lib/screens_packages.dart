@@ -1,8 +1,8 @@
 
 export 'package:flutter/material.dart';
-export 'login.dart';
+export 'entryscreen/login.dart';
 export 'constants/colors.dart';
-export 'register.dart';
+export 'entryscreen/register.dart';
 export 'dart:convert';
 export 'package:get/get.dart';
 export 'screens/category_selection/vehicle_category.dart';
@@ -17,3 +17,5 @@ export 'screens/qr_code/qrcode.dart';
 export 'constants/strings.dart';
 export 'package:qr_flutter/qr_flutter.dart';
 export 'splashscreen.dart';
+// export 'routes.dart';
+
