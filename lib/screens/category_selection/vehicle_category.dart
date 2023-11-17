@@ -11,13 +11,14 @@ class _Vehicle_CategoryState extends State<Vehicle_Category> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.splashBgColor,
       body: Column(
         children: [
 
 
           Container(
             margin: EdgeInsets.fromLTRB((MediaQuery.of(context).size.width)*0.05,(MediaQuery.of(context).size.height)*0.2,(MediaQuery.of(context).size.width)*0.05, (MediaQuery.of(context).size.height)*0),
-              child: Text('PLEASE SELECT YOUR VEHICLE CATEGORY',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600, color: AppColors.navyPrimary),)),
+              child: Text('PLEASE SELECT YOUR VEHICLE CATEGORY',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w800, color: AppColors.white),)),
 
           Row(
             children: [
@@ -69,7 +70,7 @@ class _Vehicle_CategoryState extends State<Vehicle_Category> {
 
               Container(
                   margin: EdgeInsets.fromLTRB((MediaQuery.of(context).size.width)*0.1, (MediaQuery.of(context).size.height)*0, (MediaQuery.of(context).size.width)*0.05, (MediaQuery.of(context).size.height*0.01)),
-                  child: Text('2 Wheeler', style: TextStyle(fontSize:20, color: AppColors.navyPrimary, fontWeight: FontWeight.w500),)),
+                  child: Text('2 Wheeler', style: TextStyle(fontSize:20, color: AppColors.white, fontWeight: FontWeight.w700),)),
 
 
 
@@ -77,7 +78,7 @@ class _Vehicle_CategoryState extends State<Vehicle_Category> {
 
               Container(
                   margin: EdgeInsets.fromLTRB((MediaQuery.of(context).size.width)*0.27, (MediaQuery.of(context).size.height)*0, (MediaQuery.of(context).size.width)*0.05, (MediaQuery.of(context).size.height*0.01)),
-                  child: Text('4 Wheeler', style: TextStyle(fontSize:20, color: AppColors.navyPrimary, fontWeight: FontWeight.w500),))
+                  child: Text('4 Wheeler', style: TextStyle(fontSize:20, color: AppColors.white, fontWeight: FontWeight.w700),))
 
 
             ],

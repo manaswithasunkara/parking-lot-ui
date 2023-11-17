@@ -1,3 +1,5 @@
+import 'package:shared_preferences/shared_preferences.dart';
+
 import '../screens_packages.dart';
 import 'package:http/http.dart' as http;
 
@@ -45,6 +47,8 @@ Future<void> login() async{
   String message= res["message"];
 
   if (response.statusCode==200){
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('isLogin', true);
     setState(() {
       messageController.setMessage('Login Successful');
       Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context)=> const Vehicle_Category()), (route) =>  false,);

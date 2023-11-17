@@ -43,6 +43,7 @@ dependencies:
   barcode_scan2: ^4.2.1
   device_preview: ^1.1.0
   qr_flutter: ^4.0.0
+  shared_preferences: ^2.2.0
 
 #  gallery_saver: ^2.3.2
 #  flutter_launcher_icons: ^0.10.0

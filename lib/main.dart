@@ -1,4 +1,6 @@
 import 'package:device_preview/device_preview.dart';
+import 'package:slot_booking1/routes.dart' as routes;
+import 'package:slot_booking1/routes.dart';
 
 import 'screens_packages.dart';
 
@@ -15,8 +17,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const GetMaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home:SplashScreen());
+      initialRoute: Routes.splashRoute,
+      getPages: getPages,
+    );
   }
 }

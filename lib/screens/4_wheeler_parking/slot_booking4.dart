@@ -2,14 +2,14 @@ import 'package:http/http.dart' as http;
 import 'package:slot_booking1/screens_packages.dart';
 
 
-class TwoSlot extends StatefulWidget {
-  const TwoSlot({Key? key}) : super(key: key);
+class FourSlot extends StatefulWidget {
+  const FourSlot({Key? key}) : super(key: key);
 
   @override
-  State<TwoSlot> createState() => _TwoSlotState();
+  State<FourSlot> createState() => _FourSlotState();
 }
 
-class _TwoSlotState extends State<TwoSlot> {
+class _FourSlotState extends State<FourSlot> {
   Set<SeatNumber> selectedSeats = {};
   String textParkingMessage ='';
 
@@ -233,14 +233,14 @@ class _TwoSlotState extends State<TwoSlot> {
               ElevatedButton(
                 onPressed: () {
                   if(selectedSeats.isNotEmpty){
-                  // selectSeats(selectedSeats.cast<Map<String, dynamic>>().toList());
-                  List<Map<String, dynamic>> selectedList = selectedSeats.map((seats) =>
-                  {
-                    "rowI": seats.rowI, "colI": seats.colI
-                  }).toList();
-                  selectSeats(selectedList);
-                  // Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Razor_Pay(amountController: 20,)));
-                  debugPrint("checking the seat $selectedSeats, $selectedList");
+                    // selectSeats(selectedSeats.cast<Map<String, dynamic>>().toList());
+                    List<Map<String, dynamic>> selectedList = selectedSeats.map((seats) =>
+                    {
+                      "rowI": seats.rowI, "colI": seats.colI
+                    }).toList();
+                    selectSeats(selectedList);
+                    // Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Razor_Pay(amountController: 20,)));
+                    debugPrint("checking the seat $selectedSeats, $selectedList");
                   }else{
                     Get.snackbar(snackPosition: SnackPosition.BOTTOM,'Error!', "Please select your slot", duration: const Duration(seconds: 3));
                   }
@@ -274,26 +274,4 @@ class _TwoSlotState extends State<TwoSlot> {
     });
   }
 
-}
-
-class SeatNumber {
-  final int rowI;
-  final int colI;
-
-  const SeatNumber({required this.rowI, required this.colI});
-
-  @override
-  bool operator ==(Object other) {
-    return rowI == (other as SeatNumber).rowI && colI == other.colI;
-
-  }
-
-  @override
-  int get hashCode => rowI.hashCode;
-
-  @override
-  String toString() {
-    print('slot id $rowI, $colI');
-    return '[$rowI][$colI]';
-  }
 }

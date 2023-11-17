@@ -1,17 +1,27 @@
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:slot_booking1/screens_packages.dart';
 
 
-class FourSlot extends StatefulWidget {
-  const FourSlot({Key? key}) : super(key: key);
+class TwoSlot extends StatefulWidget {
+  const TwoSlot({Key? key}) : super(key: key);
 
   @override
-  State<FourSlot> createState() => _FourSlotState();
+  State<TwoSlot> createState() => _TwoSlotState();
 }
 
-class _FourSlotState extends State<FourSlot> {
+class _TwoSlotState extends State<TwoSlot> {
   Set<SeatNumber> selectedSeats = {};
   String textParkingMessage ='';
+  static const String selectedSeatKey = 'selectedSeats';
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    loadSelectedSeats();
+  }
+
 
 
   static Future<Map<String, dynamic>> selectSeats(
@@ -33,6 +43,54 @@ class _FourSlotState extends State<FourSlot> {
       throw Exception('Failed to select seats');
     }
   }
+
+
+
+
+  Future <void> getSelectedSeats() async {
+    final response = await http.get(Uri.parse('${Urls.url}/get-selected-seats'));
+    if( response.statusCode==200){
+      final jasonData= jsonDecode(response.body);
+      final selectedSeatsData = jasonData['selected_seats'];
+      for(final seatData in selectedSeatsData){
+        final rowI = seatData['rowI'];
+        final colI = seatData['colI'];
+        final selectedSeat = SeatNumber(rowI: rowI, colI: colI);
+
+      }
+      setState(() {});
+    }else{
+      print('Error: ${response.statusCode}');
+    }
+  }
+
+
+
+  Future<void> saveSelectedSeats() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setStringList(selectedSeatKey, selectedSeats.map((seat) => '${seat.rowI},${seat.colI}').toList(),);
+
+  }
+
+
+
+  Future<void> loadSelectedSeats() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String>? selectedSeatsList = prefs.getStringList(selectedSeatKey);
+
+    if(selectedSeatsList!= null){
+      selectedSeats= selectedSeatsList.map((seat){
+        List<String> parts = seat.split(',');
+        return SeatNumber(rowI: int.parse(parts[0]), colI:int.parse(parts[1]));
+      }).toSet().cast<SeatNumber>();
+    }
+  }
+
+
+
+
+
+
 
 
   @override
@@ -233,14 +291,14 @@ class _FourSlotState extends State<FourSlot> {
               ElevatedButton(
                 onPressed: () {
                   if(selectedSeats.isNotEmpty){
-                    // selectSeats(selectedSeats.cast<Map<String, dynamic>>().toList());
-                    List<Map<String, dynamic>> selectedList = selectedSeats.map((seats) =>
-                    {
-                      "rowI": seats.rowI, "colI": seats.colI
-                    }).toList();
-                    selectSeats(selectedList);
-                    // Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Razor_Pay(amountController: 20,)));
-                    debugPrint("checking the seat $selectedSeats, $selectedList");
+                  // selectSeats(selectedSeats.cast<Map<String, dynamic>>().toList());
+                  List<Map<String, dynamic>> selectedList = selectedSeats.map((seats) =>
+                  {
+                    "rowI": seats.rowI, "colI": seats.colI
+                  }).toList();
+                  selectSeats(selectedList);
+                  // Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Razor_Pay(amountController: 20,)));
+                  debugPrint("checking the seat $selectedSeats, $selectedList");
                   }else{
                     Get.snackbar(snackPosition: SnackPosition.BOTTOM,'Error!', "Please select your slot", duration: const Duration(seconds: 3));
                   }
@@ -266,6 +324,7 @@ class _FourSlotState extends State<FourSlot> {
     } else {
       selectedSeats.remove(SeatNumber(rowI: rowI, colI: colI));
     }
+    saveSelectedSeats();
   }
 
   void _updatedSeat(rowI, colI){
@@ -296,4 +355,5 @@ class SeatNumber {
     print('slot id $rowI, $colI');
     return '[$rowI][$colI]';
   }
+
 }

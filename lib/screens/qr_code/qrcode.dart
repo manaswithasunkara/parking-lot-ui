@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:slot_booking1/constants/colors.dart';
 
 class GenerateQrCodePage extends StatefulWidget {
   String? paymentId;
@@ -15,8 +16,9 @@ class _GenerateQrCodePageState extends State<GenerateQrCodePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.splashBgColor,
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: AppColors.splashBgColor,
         title: const Text(
           'QR Code Generator',
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
@@ -34,33 +36,28 @@ class _GenerateQrCodePageState extends State<GenerateQrCodePage> {
                   style: TextStyle(
                       fontSize: 30.0,
                       fontWeight: FontWeight.w600,
-                      color: Colors.black),
+                      color: AppColors.white),
                   textAlign: TextAlign.center),
-              const SizedBox(
-                height: 10.0,
-              ),
               Container(
+                padding: const EdgeInsets.only(top: 10, bottom: 20),
                 alignment: Alignment.center,
                 child: SizedBox(
                   height: 250,
                   child: QrImageView(
+                    backgroundColor: AppColors.white,
                     data: widget.paymentId!,
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 20.0,
-              ),
+
               const Divider(
                 height: 20.0,
                 thickness: 1.0,
-                color: Colors.black,
+                color: AppColors.white,
                 endIndent: 42.0,
                 indent: 42.0,
               ),
-              const SizedBox(
-                height: 20.0,
-              ),
+
               Container(
                 alignment: Alignment.center,
                 padding: const EdgeInsets.only(left: 40.0, right: 40.0),
@@ -69,13 +66,11 @@ class _GenerateQrCodePageState extends State<GenerateQrCodePage> {
                   style: TextStyle(
                       fontSize: 17.0,
                       fontWeight: FontWeight.w400,
-                      color: Colors.black),
-                  textAlign: TextAlign.left,
+                      color: AppColors.white),
+                  textAlign: TextAlign.center,
                 ),
               ),
-              const SizedBox(
-                height: 12.0,
-              ),
+
               // TextField(
               //   controller: qrText,
               //   decoration: const InputDecoration(

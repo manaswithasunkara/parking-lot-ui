@@ -1,4 +1,4 @@
-import 'package:slot_booking1/screens/4_wheeler_parking/slot_booking.dart';
+import 'package:slot_booking1/screens/4_wheeler_parking/slot_booking4.dart';
 import 'package:slot_booking1/screens_packages.dart';
 
 class Four_Dasboards extends StatefulWidget {

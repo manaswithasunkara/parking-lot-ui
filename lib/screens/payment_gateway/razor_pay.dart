@@ -187,13 +187,15 @@ class _Razor_PayState extends State<Razor_Pay> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.keyboard_arrow_left),
-          onPressed: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context)=> Two_Dashboards()));
-          },
-        ),
+        // leading: IconButton(
+        //   icon: const Icon(Icons.keyboard_arrow_left),
+        //   onPressed: (){
+        //     Navigator.push(context, MaterialPageRoute(builder: (context)=> Two_Dashboards()));
+        //   },
+        // ),
         title: const Text("Parking only"),
+        centerTitle: true,
+        backgroundColor: AppColors.splashBgColor,
       ),
       body: SafeArea(
         child: Container(
@@ -209,7 +211,7 @@ class _Razor_PayState extends State<Razor_Pay> {
               Text(textParkingMessage),
               SizedBox(height: 20,),
               Flexible(
-                child: SizedBox(
+                child: Container(
                   width: double.maxFinite,
                   height: 500,
                   child: SeatLayoutWidget(

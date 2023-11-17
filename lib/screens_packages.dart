@@ -9,7 +9,7 @@ export 'screens/category_selection/vehicle_category.dart';
 export 'screens/Dashboards/dashboards.dart';
 export 'screens/2_wheeler_parking/2_wheeler_dasboards.dart';
 export 'screens/4_wheeler_parking/4_wheeler_dashboards.dart';
-export 'screens/2_wheeler_parking/slot_booking.dart';
+export 'screens/2_wheeler_parking/slot_booking2.dart';
 export 'package:razorpay_flutter/razorpay_flutter.dart';
 // export 'screens/payment_gateway/razor_pay.dart';
 export 'package:book_my_seat/book_my_seat.dart';
@@ -17,5 +17,4 @@ export 'screens/qr_code/qrcode.dart';
 export 'constants/strings.dart';
 export 'package:qr_flutter/qr_flutter.dart';
 export 'splashscreen.dart';
-// export 'routes.dart';
-
+export 'screens/4_wheeler_parking/slot_booking4.dart';
